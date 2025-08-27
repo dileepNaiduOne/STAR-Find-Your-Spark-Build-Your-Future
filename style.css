@@ -1,0 +1,163 @@
+[data-testid="stAppViewContainer"] {
+    /* background-image: url("https://raw.githubusercontent.com/dileepNaiduOne/BUDGET-app/refs/heads/main/images/backgro1.webp"); */
+    background-color: #77c3f2;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+:root{
+  --fs-base: 1.5rem;        
+  --app-font: "DM Sans", Arial, Helvetica, sans-serif;
+}
+
+html {
+  font-family: var(--app-font);
+  font-size: var(--fs-base); /* 1rem == var(--fs-base) */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button, input, select, textarea { font-family: inherit; }
+
+[data-testid="stBaseButton-primary"] {
+    border-radius: 20px;
+    transition: transform 0.3s, background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    font-weight: bold;
+    background-color: #2c2e2e;
+    color: #F2F2F2;
+    padding: 0 20px;
+    border: None;
+}
+
+[data-testid="stBaseButton-primary"]:hover {
+    flex : 1;
+    background-color: #F2F2F2;
+    color: #2c2e2e;
+    box-shadow: 0.5rem 0.5rem 1rem 0 rgba(0,0,0,0.2);
+    transform: scale(1.1);
+}
+
+[data-testid="stBaseButton-primary"]:active {
+    transform: scale(0.9);
+}
+
+[data-baseweb="button-group"] {
+    display: flex;
+    align-self:flex-end;
+    align-items: center;
+    align-content: space-between;
+    justify-content: space-between;
+    justify-items: center;
+    column-gap: min(2vh, 1vw);
+    margin: 0;
+}
+
+
+[data-testid="stBaseButton-pills"] {
+    border-radius: 20px;
+    transition: transform 0.3s, background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    font-weight: bold;
+    background-color: #2c2e2e;
+    color: #F2F2F2;
+    padding: 0 20px;
+    border: None;
+}
+
+[data-testid="stBaseButton-pills"]:hover {
+    flex : 1;
+    background-color: #F2F2F2;
+    color: #2c2e2e;
+    box-shadow: 0.5rem 0.5rem 1rem 0 rgba(0,0,0,0.2);
+    transform: scale(1.1);
+}
+
+[data-testid="stBaseButton-pills"]:active {
+    transform: scale(0.9);
+}
+
+[data-testid="stBaseButton-pills"]:focus {
+    background-color: #F2F2F2;
+    color: #2c2e2e;
+}
+
+[data-testid="stBaseButton-pillsActive"]{
+    background-color: #F2F2F2;
+    color: #2c2e2e;
+    padding: 0 20px;
+    border: None;
+}
+
+[data-testid="stBaseButton-pillsActive"]:hover{
+    background-color: #F2F2F2;
+    color: #2c2e2e;
+    border: None;
+}
+
+
+[data-testid="stBaseButton-primaryFormSubmit"] {
+    border-radius: 20px;
+    transition: transform 0.3s, background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    font-weight: bold;
+    background-color: #2c2e2e;
+    color: #F2F2F2;
+    padding: 0 20px;
+    border: None;
+}
+
+[data-testid="stBaseButton-primaryFormSubmit"]:hover {
+    flex : 1;
+    background-color: #F2F2F2;
+    color: #2c2e2e;
+    box-shadow: 0.5rem 0.5rem 1rem 0 rgba(0,0,0,0.2);
+    transform: scale(1.1);
+}
+
+[data-testid="stBaseButton-primaryFormSubmit"]:active {
+    transform: scale(0.9);
+}
+
+.stHorizontalBlock.st-emotion-cache-ocqkz7.e1f1d6gn5 {
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+}
+
+[data-testid="stVideo"] {
+    border-radius: 20px; /* Optional: Rounds the corners of the video */
+    box-shadow: 0rem 0rem 1rem 0.5rem rgb(22, 22, 22); /* Drop shadow effect */
+}
+
+#budget, #glimpse-of-pipeline, #predict-with, .st-key-footerlinkedin a{
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center; /* Center-align the text (optional) */
+}
+
+.stElementContainer.element-container.st-emotion-cache-o0r03.e1f1d6gn4 .stButtonGroup, .st-key-contai .stButtonGroup, .st-key-pipehome .stButton, .st-key-tableau-block, .st-key-home-selects .stButtonGroup{
+    justify-content: center;
+    justify-items: center;
+    align-items: center; 
+    align-content: center;
+    text-align: center; 
+}
+
+
+/* .stVerticalBlock .st-emotion-cache-1ejefn0 .e1f1d6gn2, .stVerticalBlock .st-emotion-cache-5cliro .e1f1d6gn2 {
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+}
+
+.stButtonGroup {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+} */
+
+[aria-label="dialog"] {
+    width: 900px;
+}
