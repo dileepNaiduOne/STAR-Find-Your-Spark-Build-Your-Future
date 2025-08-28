@@ -143,8 +143,7 @@ button, input, select, textarea { font-family: inherit; }
     text-align: center; 
 }
 
-.st-key-customHeadLine .st-emotion-cache-mptgkq.exotz4b0{
-    /* font-weight: bold; */
+.st-key-customHeadLine .stText{
     font-size: 2.5rem;  
     line-height: 2.5rem;
 }
