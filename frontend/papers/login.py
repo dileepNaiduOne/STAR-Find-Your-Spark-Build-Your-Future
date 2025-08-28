@@ -9,7 +9,7 @@ with c1:
         with st.container(key="customLogo"):
             s0, s1, = st.columns([0.2, 0.8])
             with s0:
-                st.image(r"frontend\assets\STAR.png")
+                st.image(r"https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR.png")
         with st.container(key="customHeadLine"):
             st.text("A Personalized Guide\nto Your Future")
         with st.container(key="customHeadTags"):
@@ -20,4 +20,4 @@ with c1:
 
 
 with c3:
-    st.image(r"frontend\assets\Home-Stick.png")
+    st.image(r"https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/Home-Stick.png")
