@@ -7,7 +7,7 @@ with open( "style.css" ) as css:
 
 login_page = st.Page(
     page="frontend/papers/login.py", 
-    title="Login Page"
+    title="STAR - Welcome"
 )
 
 pg = st.navigation(pages=[login_page], position="hidden")
