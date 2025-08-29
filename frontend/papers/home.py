@@ -17,7 +17,7 @@ with c1:
         st.switch_page("frontend/papers/reload_error.py")
     st.write("")
     st.write("")
-    st.image(r"frontend\assets\STAR with tag.png")
+    st.image(r"https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR%20with%20tag.png")
 
 
 # resume_feedback = st.button("Résumé Feedback", type="primary")
