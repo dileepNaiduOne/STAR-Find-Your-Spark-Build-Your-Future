@@ -21,12 +21,3 @@ class UserData(Base):
     secret_sentence = Column(String(300), nullable=False)
 
 Base.metadata.create_all(engine)
-
-
-# try:
-#     with engine.connect() as conn:
-#         conn.execute(text("SELECT current_database();"))
-#         conn.commit()
-#         print("✅ Table 'users' created (if not already).")
-# except Exception as e:
-#     print("❌ Error:", e)
