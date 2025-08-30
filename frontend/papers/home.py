@@ -22,15 +22,11 @@ except AttributeError:
     st.switch_page("frontend/papers/reload_error.py")
 
 
-# resume_feedback = st.button("Résumé Feedback", type="primary")
-# if resume_feedback:
-#     st.switch_page("frontend/papers/resume_check.py")
+st.write("")
+st.write("")
 
-# out = st.button("Log Out", type="primary")
-# if out:
-#     st.switch_page("frontend/papers/login.py")
-
-task = st.pills(label="select", options=["Résumé Feedback", "Log Out"], label_visibility="collapsed")
+with st.container(key="pills1"):
+    task = st.pills(label="select", options=["Résumé Feedback", "Log Out"], label_visibility="collapsed")
 
 if task == "Résumé Feedback":
     st.switch_page("frontend/papers/resume_check.py")

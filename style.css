@@ -43,6 +43,36 @@ button, input, select, textarea { font-family: inherit; }
     transform: scale(0.95);
 }
 
+[data-testid="stBaseButton-primary"]:disabled {
+    border-radius: 2rem;
+    font-weight: bold;
+    background-color: #474747;
+    color: #F2F2F2;
+    padding: 0 2rem;
+    border: None;
+}
+
+[data-testid="stBaseButton-secondary"] {
+    border-radius: 2rem;
+    transition: transform 0.3s, background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    background-color: #262626;
+    color: #F2F2F2;
+    padding: 0 1rem;
+    border: None;
+}
+
+[data-testid="stBaseButton-secondary"]:hover {
+    flex : 1;
+    background-color: #77c3f2;
+    color: #262626;
+    box-shadow: 0.5rem 0.5rem 1rem 0 rgba(0,0,0,0.2);
+    transform: scale(1.05);
+}
+
+[data-testid="stBaseButton-secondary"]:active {
+    transform: scale(0.95);
+}
+
 [data-baseweb="button-group"] {
     display: flex;
     align-self:flex-end;
@@ -150,4 +180,11 @@ button, input, select, textarea { font-family: inherit; }
 
 [aria-label="dialog"] {
     width: 900px;
+}
+
+.st-key-pills1{
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center; /* Center-align the text (optional) */
 }
