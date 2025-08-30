@@ -1,7 +1,6 @@
 import streamlit as st
 st.set_page_config(layout="wide")
-# st.set_page_config(page_icon="frontend/assets/STAR Logo.png")
-
+st.set_page_config(menu_items={"About":"Dileep Naidu"})
 
 with open( "style.css" ) as css:
     st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
@@ -9,7 +8,7 @@ with open( "style.css" ) as css:
 st.markdown(
     f"""
     <div style="display:flex; justify-content:center; align-items:center;">
-        <img src="https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR%20with%20tag.png" 
+        <img src="https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR%20Logo.png" 
              alt="User Image" style="max-width:20%;">
     </div>
     """,
