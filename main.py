@@ -1,18 +1,20 @@
 import streamlit as st
 
 st.set_page_config(layout="wide")
+st.set_page_config(page_icon="frontend/assets/STAR Logo.png")
+
 
 with open( "style.css" ) as css:
     st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
 
 login_page = st.Page(
     page="frontend/papers/login.py", 
-    title="STAR - Welcome"
+    title="STAR"
 )
 
 home_page = st.Page(
     page="frontend/papers/home.py", 
-    title=f"Namaste!"
+    title=f"STAR - Namaste!"
 )
 
 reload_page = st.Page(
