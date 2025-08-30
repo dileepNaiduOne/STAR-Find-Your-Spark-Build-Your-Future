@@ -4,9 +4,16 @@
 # from io import BytesIO
 # import os
 from google import genai
+from pydantic import BaseModel, Field
 import pathlib
 from backend.code.shuffle_llm_key import get_a_key
 from config import LLM_model
+from backend.code.prompts import resume_feedback_prompt
+
+class FeedbackOutput(BaseModel):
+    soft_skills: list[str] = Field(..., description="List of soft skills extracted from the resume")
+    tech_skills: list[str] = Field(..., description="List of technical skills extracted from the resume")
+    feedback: str = Field(..., description="Overall feedback summary of the resume")
 
 
 def get_feedback_from_llm(uploaded_file):
@@ -20,9 +27,20 @@ def get_feedback_from_llm(uploaded_file):
     sample_file = client.files.upload(file=file_path)
 
     response = client.models.generate_content(
-    model=LLM_model,
-    contents=[sample_file, "Summarize this document"])
-    return response.text
+        model=LLM_model,
+        contents=[sample_file, resume_feedback_prompt],
+        config={
+            "response_mime_type": "application/json",
+            "response_schema": FeedbackOutput
+        })
+    
+    response_json = FeedbackOutput.model_validate_json(response.text)
+    
+    soft = response_json.soft_skills
+    tech = response_json.tech_skills
+    feed = response_json.feedback
+
+    return feed
 
 # def extract_text_from_resume(uploaded_file):
 #     '''Not this this, it is not upto mark. Context is not caputing'''
