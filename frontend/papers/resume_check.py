@@ -2,6 +2,8 @@ import streamlit as st
 from backend.code.functions import get_feedback_from_llm
 import tempfile
 import os
+import streamlit.components.v1 as components
+
 
 st.set_page_config(menu_items={"About":"Dileep Naidu"})
 
@@ -10,23 +12,34 @@ with open( "style.css" ) as css:
 
 user_id = st.session_state.user["user_id"]
 
-c0, c1 = st.columns([0.3, 0.7])
+c0, c1 = st.columns([0.5, 0.5])
 with c0:
-    s0, s1, = st.columns([0.3, 0.7])
-    with s0:
-        st.image(r"https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR.png")
+    st.html(
+    f"""
+    <div>
+        <img src="https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR.png" 
+             alt="logo" style="max-width:20%;">
+    </div>
+    """
+)
     st.write("")
     st.markdown(f"""<div style="font-size: 1.5rem;">Upload Your Résumé</div>""", unsafe_allow_html=True)
 
-    upload = st.file_uploader(label="Resume", label_visibility="collapsed")
+    upload = st.file_uploader(label="Resume", label_visibility="collapsed", type=["pdf", "doc", "docx"])
     st.write("")
     st.write("")
     go = st.button(label="Get Feedback", type="primary")
 
+s0 = st.empty()
+s1 = st.empty()
+s2 = st.empty()
+s3 = st.empty()
+
 if go:
     if upload:
-        st.divider()
-        st.title("Feedback", anchor=False)
+        st.toast("Scroll down and wait for a moment.", icon=":material/arrow_circle_down:", duration="long")
+        s0.divider()
+        s1.title("Feedback", anchor=False)
         with st.spinner(text="Please, wait. LLM is working on your file...", show_time=True):
             extension = os.path.splitext(upload.name)[1]
 
@@ -35,7 +48,10 @@ if go:
                 temp_path = tmp_file.name
 
             # st.write(f"{upload._file_urls.upload_url}/{upload.name}")
-            st.write(get_feedback_from_llm(temp_path))
+
+            feedback = get_feedback_from_llm(temp_path)
+            s2.write(feedback)
+        s3.divider()
     else:
         st.html(
             f"""
@@ -52,5 +68,11 @@ if go:
             </div>
             """
         )
+
+with st.container(key="myButtons"):
+    back = st.button(label="Back to Home", type="primary")
+
+if back:
+    st.switch_page("frontend/papers/home.py")
 
 

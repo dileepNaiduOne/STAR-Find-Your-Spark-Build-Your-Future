@@ -9,6 +9,9 @@ import pathlib
 from backend.code.shuffle_llm_key import get_a_key
 from config import LLM_model
 from backend.code.prompts import resume_feedback_prompt
+from email_validator import validate_email, EmailNotValidError
+
+
 
 class FeedbackOutput(BaseModel):
     soft_skills: list[str] = Field(..., description="List of soft skills extracted from the resume")
@@ -41,6 +44,14 @@ def get_feedback_from_llm(uploaded_file):
     feed = response_json.feedback
 
     return feed
+
+
+def check_email(email):
+    try:
+        valid = validate_email(email)  # will throw error if invalid
+        return True
+    except EmailNotValidError as e:
+        return False
 
 # def extract_text_from_resume(uploaded_file):
 #     '''Not this this, it is not upto mark. Context is not caputing'''

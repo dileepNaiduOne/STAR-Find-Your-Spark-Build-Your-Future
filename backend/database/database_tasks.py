@@ -1,27 +1,50 @@
 from dotenv import load_dotenv
 import os
-from sqlalchemy import create_engine, Column, Integer, String, Text, text
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
 from backend.database.create_tables_structure import UserData
 
+# Load environment variables
 load_dotenv()  
 
 DATABASE_URL = os.getenv("POSTGRESQL_ADDON_URI")
-engine = create_engine(DATABASE_URL)
+
+# Configure engine with connection pooling
+engine = create_engine(
+    DATABASE_URL,
+    pool_size=5,          # max 5 connections in pool
+    max_overflow=0,       # don’t allow more than 5
+    pool_timeout=30,      # wait 30s before raising error
+    pool_recycle=1800     # recycle connections every 30 min
+)
+
+# Session factory
+SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
 
-def ckeck_if_email_in_user_data(email):
-    query = text("SELECT COUNT(*) FROM user_data WHERE email = :email")
-    with engine.connect() as conn:
-        result = conn.execute(query, {"email": email}).scalar()
-        return result
-    
-SessionLocal = sessionmaker(bind=engine)
-
-def add_new_user_to_user_data(name, email, age, gender, pin, secret_sentence):
+def check_if_email_in_user_data(email: str):
+    """Check if an email exists in user_data table."""
     session = SessionLocal()
     try:
-        new_user = UserData(user_name=name, email=email, age=age, gender=gender, pin=pin, secret_sentence=secret_sentence)
+        query = text("SELECT COUNT(*) FROM user_data WHERE email = :email")
+        result = session.execute(query, {"email": email}).scalar()
+        return result
+    finally:
+        session.close()  # return connection to pool
+
+
+def add_new_user_to_user_data(name, email, age, gender, pin, secret_sentence):
+    """Add a new user to user_data table."""
+    session = SessionLocal()
+    try:
+        new_user = UserData(
+            user_name=name,
+            email=email,
+            age=age,
+            gender=gender,
+            pin=pin,
+            secret_sentence=secret_sentence
+        )
         session.add(new_user)
         session.commit()
     except Exception as e:
@@ -30,16 +53,18 @@ def add_new_user_to_user_data(name, email, age, gender, pin, secret_sentence):
     finally:
         session.close()
 
-def ckeck_if_user_in_user_data(email, pin):
-    query = text("SELECT * FROM user_data WHERE email = :email and pin =:pin")
-    with engine.connect() as conn:
-        result = conn.execute(query, {"email": email, "pin": pin})
+
+def check_if_user_in_user_data(email: str, pin: str):
+    """Check if a user exists with given email and pin."""
+    session = SessionLocal()
+    try:
+        query = text("SELECT * FROM user_data WHERE email = :email AND pin = :pin")
+        result = session.execute(query, {"email": email, "pin": pin})
         data = result.fetchall()
-        if len(data) > 0:
-            user = data[0]
-        else:
-            user = None
-        return user
-    
+        return data[0] if data else None
+    finally:
+        session.close()
+
+
 if __name__ == '__main__':
     pass

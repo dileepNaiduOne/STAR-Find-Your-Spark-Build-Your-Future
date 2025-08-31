@@ -1,5 +1,6 @@
 import streamlit as st
-from backend.database.database_tasks import ckeck_if_email_in_user_data, add_new_user_to_user_data, ckeck_if_user_in_user_data
+from backend.database.database_tasks import check_if_email_in_user_data, add_new_user_to_user_data, check_if_user_in_user_data
+from backend.code.functions import check_email
 
 
 
@@ -27,19 +28,21 @@ def sign_up():
                         st.html(f"""<div style="color: #A62B1F; font-weight: bold; border: 2px solid #F2F2F2; padding: 10px; border-radius: 5rem; background-color: #F2F2F2;display:flex; justify-content:center; align-items:center;"> PIN should be a number </div>""")
                     if len(pin) != 4:
                         st.html(f"""<div style="color: #A62B1F; font-weight: bold; border: 2px solid #F2F2F2; padding: 10px; border-radius: 5rem; background-color: #F2F2F2;display:flex; justify-content:center; align-items:center;"> PIN should have 4 numbers </div>""")
+                    if not check_email(email):
+                        st.html(f"""<div style="color: #A62B1F; font-weight: bold; border: 2px solid #F2F2F2; padding: 10px; border-radius: 5rem; background-color: #F2F2F2;display:flex; justify-content:center; align-items:center;"> Type in a valid email </div>""")
                     else:
                         secret_sentence = secret_sentence.lower().replace(" ", "")
                         email = email.lower().replace(" ", "")
                         pin = pin.strip()
                         with st.spinner(text="Signing up...", show_time=True):
-                            if ckeck_if_email_in_user_data(email) == 1:
+                            if check_if_email_in_user_data(email) == 1:
                                 st.html(f"""<div style="color: #A62B1F; font-weight: bold; border: 2px solid #F2F2F2; padding: 10px; border-radius: 5rem; background-color: #F2F2F2;display:flex; justify-content:center; align-items:center;"> Email you texted is already using by other user. Use another email </div>""")
                             else:
                                 add_new_user_to_user_data(name, email, age, gender, pin, secret_sentence)
 
                                 st.toast(f"Welcome, {name}! Your account has been created.")
                                 
-                                user = ckeck_if_user_in_user_data(email, pin)
+                                user = check_if_user_in_user_data(email, pin)
                                 if user == None:
                                     st.html(f"""<div style="color: #A62B1F; font-weight: bold; border: 2px solid #F2F2F2; padding: 10px; border-radius: 5rem; background-color: #F2F2F2;display:flex; justify-content:center; align-items:center;"> Your credentials is not matching with the database. PLEASE CHECK </div>""")
                                 elif len(user) == 7:
@@ -73,7 +76,7 @@ def log_in():
                 with st.spinner(text="Logging in...", show_time=True):
                     email = email.lower().replace(" ", "")
                     pin = pin.strip()
-                    user = ckeck_if_user_in_user_data(email, pin)
+                    user = check_if_user_in_user_data(email, pin)
                     if user == None:
                         st.html(f"""<div style="color: #A62B1F; font-weight: bold; border: 2px solid #F2F2F2; padding: 10px; border-radius: 5rem; background-color: #F2F2F2;display:flex; justify-content:center; align-items:center;"> Your credentials is not matching with the database. PLEASE CHECK </div>""")
                     elif len(user) == 7:

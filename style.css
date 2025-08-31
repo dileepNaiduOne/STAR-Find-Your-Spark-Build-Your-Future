@@ -188,3 +188,7 @@ button, input, select, textarea { font-family: inherit; }
     align-items: center; /* Center vertically */
     text-align: center; /* Center-align the text (optional) */
 }
+
+.st-key-myButtons button{
+    background-color: #A62B1F;
+}
