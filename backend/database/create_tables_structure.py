@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
-from sqlalchemy import create_engine, Column, Integer, String, Text
-from sqlalchemy.orm import declarative_base
+from sqlalchemy import create_engine, Column, Integer, String, Text, ForeignKey
+from sqlalchemy.orm import declarative_base, relationship
 
 load_dotenv()  
 
@@ -19,5 +19,17 @@ class UserData(Base):
     gender = Column(String(100), nullable=False)
     pin = Column(String(4), nullable=False)
     secret_sentence = Column(String(300), nullable=False)
+
+    profiles = relationship("ProfileData", back_populates="user")
+
+class ProfileData(Base):
+    __tablename__ = "profile_data"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("user_data.user_id"), nullable=False)
+    profile = Column(Text, nullable=False)
+    soft_skills = Column(Text, nullable=False)
+    tech_skills = Column(Text, nullable=False)
+
+    user = relationship("UserData", back_populates="profiles")
 
 Base.metadata.create_all(engine)

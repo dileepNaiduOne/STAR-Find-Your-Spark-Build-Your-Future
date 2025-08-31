@@ -14,6 +14,7 @@ from email_validator import validate_email, EmailNotValidError
 
 
 class FeedbackOutput(BaseModel):
+    user_profile: str = Field(..., description="Synthesize a professional and learning profile of the candidate in a single paragraph")
     soft_skills: list[str] = Field(..., description="List of soft skills extracted from the resume")
     tech_skills: list[str] = Field(..., description="List of technical skills extracted from the resume")
     feedback: str = Field(..., description="Overall feedback summary of the resume")
@@ -38,7 +39,8 @@ def get_feedback_from_llm(uploaded_file):
         })
     
     response_json = FeedbackOutput.model_validate_json(response.text)
-    
+
+    user_profile = response_json.user_profile
     soft = response_json.soft_skills
     tech = response_json.tech_skills
     feed = response_json.feedback
