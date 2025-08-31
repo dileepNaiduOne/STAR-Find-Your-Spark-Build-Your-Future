@@ -12,11 +12,17 @@ with c1:
             s0, s1, = st.columns([0.4, 0.6])
             with s0:
                 st.image(r"https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR.png")
+                st.write("")
+                st.write("")
+                st.write("")
         with st.container(key="customHeadLine"):
             st.text("A Personalized Guide\nto Your Future")
         with st.container(key="customHeadTags"):
             st.markdown("""Résumé Feedback &nbsp;&nbsp;•&nbsp;&nbsp; Career Guide &nbsp;&nbsp;•&nbsp;&nbsp; Role Judge &nbsp;&nbsp;•&nbsp;&nbsp; Step-by-Step Skill Path &nbsp;&nbsp;•&nbsp;&nbsp; A Friend Who Believes in You""")
         with st.container(key="customLogin"):
+            st.write("")
+            st.write("")
+            st.write("")
             do = st.pills(label="select", options=["Sign Up", "Login"], label_visibility="collapsed")
             if do == "Sign Up":
                 sign_up()

@@ -32,4 +32,6 @@ if task == "Résumé Feedback":
     st.switch_page("frontend/papers/resume_check.py")
 
 if task == "Log Out":
+    for key in st.session_state.keys():
+        del st.session_state[key]
     st.switch_page("frontend/papers/login.py")
