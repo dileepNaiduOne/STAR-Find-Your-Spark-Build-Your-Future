@@ -17,7 +17,7 @@ st.markdown(
 st.write("")
 st.write("")
 try:
-    st.markdown(f"""<div style="display:flex; justify-content:center; align-items:center; font-size: 3.5rem;"> Hey! &nbsp<b style='color:#262626;'>{st.session_state.user["name"]}</div>""", unsafe_allow_html=True)
+    st.markdown(f"""<div style="display:flex; justify-content:center; align-items:center; font-size: 400%;"> Hey! &nbsp<b style='color:#262626;'>{st.session_state.user["name"]}</div>""", unsafe_allow_html=True)
 except AttributeError:
     st.switch_page("frontend/papers/reload_error.py")
 

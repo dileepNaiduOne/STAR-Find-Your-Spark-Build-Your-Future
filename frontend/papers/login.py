@@ -8,10 +8,12 @@ c0, c1, c2, c3, c4= st.columns([0.1, 0.45, 0.1, 0.25, 0.1])
 
 with c1:
     with st.container(key="custom1"):
-        with st.container(key="customLogo"):
-            s0, s1, = st.columns([0.4, 0.6])
-            with s0:
-                st.image(r"https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR.png")
+        # with st.container(key="customLogo"):
+        #     s0, s1, = st.columns([0.4, 0.6])
+        #     with s0:
+        #         st.image(r"https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR.png")
+
+        st.html(f"""<div><img src="https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR.png" alt="Image" style="max-width:30%;"></div>""")
         st.write("")
         st.write("")
         with st.container(key="customHeadLine"):

@@ -8,7 +8,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 
 :root{
-  --fs-base: 1.3rem;        
+  --fs-base: 100%;        
   --app-font: "DM Sans", Arial, Helvetica, sans-serif;
 }
 
@@ -181,7 +181,7 @@ button, input, select, textarea { font-family: inherit; }
 }
 
 [aria-label="dialog"] {
-    width: 900px;
+    width: 60%
 }
 
 .st-key-pills1{
