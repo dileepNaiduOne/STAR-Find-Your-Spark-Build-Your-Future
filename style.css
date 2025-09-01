@@ -174,8 +174,8 @@ button, input, select, textarea { font-family: inherit; }
 }
 
 .st-key-customHeadLine .stText{
-    font-size: 3em;  
-    line-height: 4em;
+    font-size: 3rem;  
+    line-height: 4rem;
     font-weight: 300;
 
 }
