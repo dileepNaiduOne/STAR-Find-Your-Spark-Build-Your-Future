@@ -14,7 +14,6 @@ with c1:
                 st.image(r"https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR.png")
         st.write("")
         st.write("")
-        st.write("")
         with st.container(key="customHeadLine"):
             st.text("Super-App That\nAccelerates Reputation")
         with st.container(key="customHeadTags"):

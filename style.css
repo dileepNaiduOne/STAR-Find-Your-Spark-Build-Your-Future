@@ -194,3 +194,7 @@ button, input, select, textarea { font-family: inherit; }
 .st-key-myButtons button{
     background-color: #A62B1F;
 }
+
+.stMainBlockContainer {
+    padding: 5%;
+}
