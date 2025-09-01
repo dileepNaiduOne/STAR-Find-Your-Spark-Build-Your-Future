@@ -8,7 +8,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 
 :root{
-  --fs-base: 100%;        
+  --fs-base: 110%;        
   --app-font: "DM Sans", Arial, Helvetica, sans-serif;
 }
 
@@ -174,8 +174,8 @@ button, input, select, textarea { font-family: inherit; }
 }
 
 .st-key-customHeadLine .stText{
-    font-size: 3rem;  
-    line-height: 4rem;
+    font-size: 350%;  
+    line-height: 120%;
     font-weight: 300;
 
 }

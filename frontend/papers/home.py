@@ -9,7 +9,7 @@ st.markdown(
     f"""
     <div style="display:flex; justify-content:center; align-items:center;">
         <img src="https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR%20Logo.png" 
-             alt="User Image" style="max-width:20%;">
+             alt="User Image" style="max-width:max(20vw, 20vh);">
     </div>
     """,
     unsafe_allow_html=True
@@ -17,7 +17,7 @@ st.markdown(
 st.write("")
 st.write("")
 try:
-    st.markdown(f"""<div style="display:flex; justify-content:center; align-items:center; font-size: 400%;"> Hey! &nbsp<b style='color:#262626;'>{st.session_state.user["name"]}</div>""", unsafe_allow_html=True)
+    st.markdown(f"""<div style="display:flex; justify-content:center; align-items:center; font-size: max(5vw, 5vh);"> Hey! &nbsp<b style='color:#262626;'>{st.session_state.user["name"]}</div>""", unsafe_allow_html=True)
 except AttributeError:
     st.switch_page("frontend/papers/reload_error.py")
 
