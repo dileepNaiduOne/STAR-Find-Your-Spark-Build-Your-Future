@@ -2,7 +2,8 @@ from dotenv import load_dotenv
 import os
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
-from backend.database.create_tables_structure import UserData
+from backend.database.create_tables_structure import UserData, ProfileData
+import streamlit as st
 
 # Load environment variables
 load_dotenv()  
@@ -10,13 +11,18 @@ load_dotenv()
 DATABASE_URL = os.getenv("POSTGRESQL_ADDON_URI")
 
 # Configure engine with connection pooling
-engine = create_engine(
-    DATABASE_URL,
-    pool_size=5,          # max 5 connections in pool
-    max_overflow=0,       # don’t allow more than 5
-    pool_timeout=30,      # wait 30s before raising error
-    pool_recycle=1800     # recycle connections every 30 min
-)
+@st.cache_resource
+def get_engine():
+    return create_engine(
+        DATABASE_URL,
+        pool_size=5,         # matches your DB max connections
+        max_overflow=0,      # don't exceed 5
+        pool_timeout=30,     # wait 30s for free connection
+        pool_recycle=1800,   # recycle connections every 30 mins
+        pool_pre_ping=True   # check if connection is alive
+    )
+
+engine = get_engine()
 
 # Session factory
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
@@ -52,6 +58,37 @@ def add_new_user_to_user_data(name, email, age, gender, pin, secret_sentence):
         raise e
     finally:
         session.close()
+
+
+def add_new_user_to_profile_data(user_id, profile, soft_skills, tech_skills):
+    """Insert or update a user's profile data."""
+    session = SessionLocal()
+    try:
+        # Check if profile already exists for this user_id
+        existing_profile = session.query(ProfileData).filter(ProfileData.user_id == user_id).first()
+
+        if existing_profile:
+            # Update existing record
+            existing_profile.profile = profile
+            existing_profile.soft_skills = soft_skills
+            existing_profile.tech_skills = tech_skills
+        else:
+            # Insert new record
+            new_user_profile = ProfileData(
+                user_id=user_id,
+                profile=profile,
+                soft_skills=soft_skills,
+                tech_skills=tech_skills
+            )
+            session.add(new_user_profile)
+
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        raise e
+    finally:
+        session.close()
+
 
 
 def check_if_user_in_user_data(email: str, pin: str):

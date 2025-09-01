@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 import os
-from sqlalchemy import create_engine, Column, Integer, String, Text, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, Text, ForeignKey, DateTime, func
 from sqlalchemy.orm import declarative_base, relationship
 
 load_dotenv()  
@@ -19,6 +19,7 @@ class UserData(Base):
     gender = Column(String(100), nullable=False)
     pin = Column(String(4), nullable=False)
     secret_sentence = Column(String(300), nullable=False)
+    # created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     profiles = relationship("ProfileData", back_populates="user")
 
@@ -29,6 +30,7 @@ class ProfileData(Base):
     profile = Column(Text, nullable=False)
     soft_skills = Column(Text, nullable=False)
     tech_skills = Column(Text, nullable=False)
+    # created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user = relationship("UserData", back_populates="profiles")
 

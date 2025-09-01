@@ -2,8 +2,6 @@ import streamlit as st
 from backend.database.database_tasks import check_if_email_in_user_data, add_new_user_to_user_data, check_if_user_in_user_data
 from backend.code.functions import check_email
 
-
-
 @st.dialog("Sign Up")
 def sign_up():
     if "user" not in st.session_state:
@@ -38,7 +36,7 @@ def sign_up():
                             if check_if_email_in_user_data(email) == 1:
                                 st.html(f"""<div style="color: #A62B1F; font-weight: bold; border: 2px solid #F2F2F2; padding: 10px; border-radius: 5rem; background-color: #F2F2F2;display:flex; justify-content:center; align-items:center;"> Email you texted is already using by other user. Use another email </div>""")
                             else:
-                                add_new_user_to_user_data(name, email, age, gender, pin, secret_sentence)
+                                add_new_user_to_user_data(name, email, int(age), gender, pin, secret_sentence)
 
                                 st.toast(f"Welcome, {name}! Your account has been created.")
                                 
@@ -53,10 +51,8 @@ def sign_up():
                                             }
 
                                     st.switch_page("frontend/papers/home.py")
-
-                            st.rerun()
     else:
-        st.write(f"{st.session_state.user["name"]}, Don't try to cheat me😉.")
+        st.write(f"{st.session_state.user['name']}, Don't try to cheat me😉.")
         st.html("You have already Signed Up. Do <b style='color:maroon;'>Log In</b>")
 
 

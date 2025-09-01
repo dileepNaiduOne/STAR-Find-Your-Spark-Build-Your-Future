@@ -9,7 +9,9 @@ import pathlib
 from backend.code.shuffle_llm_key import get_a_key
 from config import LLM_model
 from backend.code.prompts import resume_feedback_prompt
+from backend.database.database_tasks import add_new_user_to_profile_data
 from email_validator import validate_email, EmailNotValidError
+import streamlit as st
 
 
 
@@ -45,12 +47,15 @@ def get_feedback_from_llm(uploaded_file):
     tech = response_json.tech_skills
     feed = response_json.feedback
 
+    add_new_user_to_profile_data(user_id=st.session_state.user["user_id"], profile=user_profile, soft_skills=soft, tech_skills=tech)
+    
+
     return feed
 
 
 def check_email(email):
     try:
-        valid = validate_email(email)  # will throw error if invalid
+        valid = validate_email(email)
         return True
     except EmailNotValidError as e:
         return False
