@@ -1,5 +1,6 @@
 import streamlit as st
 from backend.code.functions import get_feedback_from_llm
+from backend.code.send_mail import send_an_email
 import tempfile
 import os
 import streamlit.components.v1 as components
@@ -30,16 +31,18 @@ with c0:
     st.write("")
     go = st.button(label="Get Feedback", type="primary")
 
-s0 = st.empty()
-s1 = st.empty()
-s2 = st.empty()
-s3 = st.empty()
+st.divider()
+# s1 = st.empty()
+# s2 = st.empty()
+# s3 = st.empty()
+# s1.write("")
+# s2.write("")
+# s3.write("")
 
 if go:
     if upload:
         st.toast("Scroll down and wait for a moment.", icon=":material/arrow_circle_down:", duration="long")
-        s0.divider()
-        s1.title("Feedback", anchor=False)
+        st.title("Feedback", anchor=False)
         with st.spinner(text="Please, wait. LLM is working on your file...", show_time=True):
             extension = os.path.splitext(upload.name)[1]
 
@@ -50,8 +53,9 @@ if go:
             # st.write(f"{upload._file_urls.upload_url}/{upload.name}")
 
             feedback = get_feedback_from_llm(temp_path)
-            s2.write(feedback)
-        s3.divider()
+            st.session_state.user["feedback"] = feedback
+            st.write(feedback)
+        st.divider()
     else:
         st.html(
             f"""
@@ -69,10 +73,44 @@ if go:
             """
         )
 
-with st.container(key="myButtons"):
-    back = st.button(label="Back to Home", type="primary")
 
-if back:
-    st.switch_page("frontend/papers/home.py")
+# with st.container(key="pills1"):
+#     click = st.pills(label="click", label_visibility="collapsed", options=["📧 Email Me this", "🔙 Back to home"])
+
+
+# if click == "📧 Email Me this":
+    # if "feedback" in st.session_state.user.keys():
+    #     s1.title("Feedback", anchor=False)
+    #     s2.write(st.session_state.user["feedback"])
+    #     s3.divider()
+    #     send_an_email(text=st.session_state.user["feedback"], send_to=st.session_state.user["email"])
+    #     st.toast(body=f"👍 Email sent to {st.session_state.user["email"]}", duration="infinite")
+    #     del st.session_state.user["feedback"]
+
+    # else:
+    #     st.toast("😔 Sorry, no feedback. First generate a feedback.", duration="short")
+    
+
+
+# if click == "🔙 Back to home":
+#     st.switch_page("frontend/papers/home.py")
+
+
+
+with st.container(key="feedback_buttons"):
+    with st.container():
+        mail = st.button(label="Email me this feedback", type="primary", icon=":material/outgoing_mail:")
+    if mail:
+        if "feedback" in st.session_state.user.keys():
+            send_an_email(text=st.session_state.user["feedback"], send_to=st.session_state.user["email"])
+            st.toast(body=f"👍 Email sent to {st.session_state.user["email"]}", duration="long")
+            del st.session_state.user["feedback"]
+        else:
+            st.toast("😔 Sorry, no feedback. First generate a feedback.", duration="short")
+
+    with st.container(key="myButtons"):
+        back = st.button(label="Back to Home", type="primary")
+    if back:
+        st.switch_page("frontend/papers/home.py")
 
 

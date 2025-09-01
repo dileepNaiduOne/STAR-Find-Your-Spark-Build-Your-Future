@@ -191,10 +191,37 @@ button, input, select, textarea { font-family: inherit; }
     text-align: center; /* Center-align the text (optional) */
 }
 
+button[data-testid="stBaseButton-pills"]:last-child {
+    background-color: #A62B1F !important;
+    border-color: #A62B1F !important;
+}
+
 .st-key-myButtons button{
     background-color: #A62B1F;
 }
 
 .stMainBlockContainer {
     padding: 5%;
+}
+
+.st-key-feedback_buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 40px; /* Space between buttons */
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+    text-align: center; /* Center-align the text (optional) */
+    width:fit-content;
+    flex-wrap: nowrap;
+    display: inline-flex;
+}
+
+/* .st-key-feedback_buttons button {
+    white-space: nowrap !important;
+    width: auto !important;
+    min-width: fit-content !important;
+} */
+
+[data-testid="stToast"] {
+    background-color: #F2F2F2 !important;
 }
