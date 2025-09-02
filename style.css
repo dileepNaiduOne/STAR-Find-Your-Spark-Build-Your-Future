@@ -184,37 +184,37 @@ button, input, select, textarea { font-family: inherit; }
     width: 60%
 }
 
-.st-key-pills1{
-    display: flex; /* Enable flexbox */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    text-align: center; /* Center-align the text (optional) */
+/* .st-key-pills1{
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
 }
 
 button[data-testid="stBaseButton-pills"]:last-child {
     background-color: #A62B1F !important;
     border-color: #A62B1F !important;
-}
+} */
 
-.st-key-myButtons button{
+/* .st-key-myButtons button{
     background-color: #A62B1F;
-}
+} */
 
 .stMainBlockContainer {
     padding: 5%;
 }
 
-.st-key-feedback_buttons {
+/* .st-key-feedback_buttons {
     display: flex;
     flex-direction: row;
-    gap: 40px; /* Space between buttons */
+    gap: 40px; 
     align-items: center;
-    justify-content: center; /* Center horizontally */
-    text-align: center; /* Center-align the text (optional) */
+    justify-content: center; 
+    text-align: center; 
     width:fit-content;
     flex-wrap: nowrap;
     display: inline-flex;
-}
+} */
 
 /* .st-key-feedback_buttons button {
     white-space: nowrap !important;
@@ -224,4 +224,17 @@ button[data-testid="stBaseButton-pills"]:last-child {
 
 [data-testid="stToast"] {
     background-color: #F2F2F2 !important;
+}
+
+.st-key-buttonsPills {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;   /* center horizontally */
+    gap: 20px;                 /* spacing between buttons */
+    margin-top: 10px;
+}
+
+.stVerticalBlock .stElementContainer + .stElementContainer:last-child button {
+    background-color: #A62B1F !important;
+    color: #F2F2F2;
 }

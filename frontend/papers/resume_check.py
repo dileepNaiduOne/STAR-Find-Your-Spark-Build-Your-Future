@@ -73,33 +73,8 @@ if go:
             """
         )
 
-
-# with st.container(key="pills1"):
-#     click = st.pills(label="click", label_visibility="collapsed", options=["📧 Email Me this", "🔙 Back to home"])
-
-
-# if click == "📧 Email Me this":
-    # if "feedback" in st.session_state.user.keys():
-    #     s1.title("Feedback", anchor=False)
-    #     s2.write(st.session_state.user["feedback"])
-    #     s3.divider()
-    #     send_an_email(text=st.session_state.user["feedback"], send_to=st.session_state.user["email"])
-    #     st.toast(body=f"👍 Email sent to {st.session_state.user["email"]}", duration="infinite")
-    #     del st.session_state.user["feedback"]
-
-    # else:
-    #     st.toast("😔 Sorry, no feedback. First generate a feedback.", duration="short")
-    
-
-
-# if click == "🔙 Back to home":
-#     st.switch_page("frontend/papers/home.py")
-
-
-
-with st.container(key="feedback_buttons"):
-    with st.container():
-        mail = st.button(label="Email me this feedback", type="primary", icon=":material/outgoing_mail:")
+with st.container(key="buttonsPills"):
+    mail = st.button(label="Email me this feedback", type="primary", icon=":material/outgoing_mail:")
     if mail:
         if "feedback" in st.session_state.user.keys():
             send_an_email(text=st.session_state.user["feedback"], send_to=st.session_state.user["email"])
@@ -108,9 +83,25 @@ with st.container(key="feedback_buttons"):
         else:
             st.toast("😔 Sorry, no feedback. First generate a feedback.", duration="short")
 
-    with st.container(key="myButtons"):
-        back = st.button(label="Back to Home", type="primary")
+    back = st.button(label="Back to Home", type="primary")
     if back:
         st.switch_page("frontend/papers/home.py")
 
 
+
+
+# with st.container(key="feedback_buttons"):
+#     with st.container():
+#         mail = st.button(label="Email me this feedback", type="primary", icon=":material/outgoing_mail:")
+#     if mail:
+#         if "feedback" in st.session_state.user.keys():
+#             send_an_email(text=st.session_state.user["feedback"], send_to=st.session_state.user["email"])
+#             st.toast(body=f"👍 Email sent to {st.session_state.user["email"]}", duration="long")
+#             del st.session_state.user["feedback"]
+#         else:
+#             st.toast("😔 Sorry, no feedback. First generate a feedback.", duration="short")
+
+#     with st.container(key="myButtons"):
+#         back = st.button(label="Back to Home", type="primary")
+#     if back:
+#         st.switch_page("frontend/papers/home.py")

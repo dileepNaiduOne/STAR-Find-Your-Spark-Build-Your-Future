@@ -1,8 +1,8 @@
-# import pdfplumber
-# import docx
-# from dotenv import load_dotenv
-# from io import BytesIO
-# import os
+import pdfplumber
+import docx
+from dotenv import load_dotenv
+from io import BytesIO
+import os
 from google import genai
 from pydantic import BaseModel, Field
 import pathlib
@@ -12,6 +12,10 @@ from backend.code.prompts import resume_feedback_prompt
 from backend.database.database_tasks import add_new_user_to_profile_data
 from email_validator import validate_email, EmailNotValidError
 import streamlit as st
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
+
 
 
 
@@ -60,20 +64,31 @@ def check_email(email):
     except EmailNotValidError as e:
         return False
 
-# def extract_text_from_resume(uploaded_file):
-#     '''Not this this, it is not upto mark. Context is not caputing'''
-#     filename = uploaded_file.name
-#     ext = os.path.splitext(filename)[1].lower()
 
-#     if ext == ".pdf":
-#         with pdfplumber.open(BytesIO(uploaded_file.read())) as pdf:
-#             text = "\n".join(page.extract_text() or "" for page in pdf.pages)
-#         return text
+def extract_text_from_resume(file_path):
+    ext = os.path.splitext(file_path)[1].lower()
 
-#     elif ext in [".docx", ".doc"]:
-#         doc = docx.Document(uploaded_file)
-#         text = "\n".join(p.text for p in doc.paragraphs)
-#         return text
+    if ext == ".pdf":
+        with pdfplumber.open(file_path) as pdf:
+            text = "\n".join(page.extract_text() or "" for page in pdf.pages)
+        return text
 
-#     else:
-#         return None
+    elif ext in [".docx", ".doc"]:
+        doc = docx.Document(file_path)
+        text = "\n".join(p.text for p in doc.paragraphs)
+        return text
+
+    else:
+        return None
+    
+
+def clean_text(text):
+    doc = nlp(text.lower())
+
+    return [
+        token.text
+        for token in doc
+        if token.is_alpha and not token.is_stop
+    ]
+
+

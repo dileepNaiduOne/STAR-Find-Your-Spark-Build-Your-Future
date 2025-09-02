@@ -25,13 +25,34 @@ except AttributeError:
 st.write("")
 st.write("")
 
-with st.container(key="pills1"):
-    task = st.pills(label="select", options=["Résumé Feedback", "Log Out"], label_visibility="collapsed")
 
-if task == "Résumé Feedback":
-    st.switch_page("frontend/papers/resume_check.py")
+with st.container(key="buttonsPills"):
 
-if task == "Log Out":
-    for key in st.session_state.keys():
-        del st.session_state[key]
-    st.switch_page("frontend/papers/login.py")
+    feedback_button = st.button(label="Résumé Feedback", type="primary")
+    if feedback_button:
+        st.switch_page("frontend/papers/resume_check.py")
+
+    rolefit_button = st.button(label="Role Fit", type="primary")
+    if rolefit_button:
+        st.switch_page("frontend/papers/role_fit.py")
+
+    logout_button = st.button(label="Log Out", type="primary")
+    if logout_button:
+        for key in st.session_state.keys():
+            del st.session_state[key]
+        st.switch_page("frontend/papers/login.py")
+
+
+# with st.container(key="pills1"):
+#     task = st.pills(label="select", options=["Résumé Feedback", "Role Fit", "Log Out"], label_visibility="collapsed")
+
+# if task == "Résumé Feedback":
+#     st.switch_page("frontend/papers/resume_check.py")
+
+# if task == "Role Fit":
+#     st.switch_page("frontend/papers/role_fit.py")
+
+# if task == "Log Out":
+#     for key in st.session_state.keys():
+#         del st.session_state[key]
+#     st.switch_page("frontend/papers/login.py")

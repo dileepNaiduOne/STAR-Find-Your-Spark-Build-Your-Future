@@ -26,6 +26,11 @@ resume_check_page = st.Page(
     page="frontend/papers/resume_check.py", 
     title=f"Improve!"
 )
-pg = st.navigation(pages=[login_page, home_page, reload_page, resume_check_page], position="hidden")
+
+role_fit_page = st.Page(
+    page="frontend/papers/role_fit.py", 
+    title=f"FIt!"
+)
+pg = st.navigation(pages=[login_page, home_page, reload_page, resume_check_page, role_fit_page], position="hidden")
 
 pg.run()
