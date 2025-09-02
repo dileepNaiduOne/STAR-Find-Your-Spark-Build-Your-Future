@@ -238,3 +238,10 @@ button[data-testid="stBaseButton-pills"]:last-child {
     background-color: #A62B1F !important;
     color: #F2F2F2;
 }
+
+.st-key-rolefit .e52wr8w1 {
+    /* border: 5px solid #262626;              black border */
+    box-shadow: 0 6px 12px rgba(38,38,38,0.6); /* black shadow */
+    border-radius: 8px;                   /* optional: rounded corners */
+    padding: 3%;                        /* spacing inside */
+}
