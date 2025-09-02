@@ -13,9 +13,9 @@ from backend.database.database_tasks import add_new_user_to_profile_data
 from email_validator import validate_email, EmailNotValidError
 import streamlit as st
 import spacy
-import subprocess
-import sys
-subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
+# import subprocess
+# import sys
+# subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
 nlp = spacy.load("en_core_web_sm")
 
 
