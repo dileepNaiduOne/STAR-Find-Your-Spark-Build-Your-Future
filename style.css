@@ -239,6 +239,24 @@ button[data-testid="stBaseButton-pills"]:last-child {
     color: #F2F2F2;
 }
 
+@media (max-width: 768px) {
+    .st-key-buttonsPills {
+        flex-direction: column; /* Stack vertically on mobile */
+        gap: 12px;
+        align-items: center;
+        padding: 0 20px;
+    }
+    
+    /* Make buttons full-width on mobile for better usability */
+    .st-key-buttonsPills button {
+        width: 100% !important;
+        max-width: 280px; /* Prevent buttons from being too wide */
+        min-height: 48px; /* Ensure touch-friendly height */
+        padding: 0 20px !important;
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+}
+
 .st-key-rolefit .e52wr8w1 {
     /* border: 5px solid #262626;              black border */
     box-shadow: 0 6px 12px rgba(38,38,38,0.6); /* black shadow */

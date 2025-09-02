@@ -10,6 +10,8 @@ st.set_page_config(menu_items={"About":"Dileep Naidu"})
 with open( "style.css" ) as css:
     st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
 
+st.write("")
+
 with st.container(key="rolefit"):
 
     c0, c1 = st.columns([0.5, 0.5], border=True)
@@ -24,9 +26,6 @@ with st.container(key="rolefit"):
         st.write("")
         go = st.button(label="Extract Text", type="primary")
         st.session_state.user["clicked_go"] = False
-        st.write("")
-        st.write("")
-        st.write("")
         st.write("")
         st.divider()
 
@@ -86,7 +85,7 @@ with st.container(key="rolefit"):
     with c1:
         st.markdown(f"""<div style="font-size: 1.5rem;">Job Description</div>""", unsafe_allow_html=True)
         st.write("")
-        description = st.text_area(label="None", label_visibility="collapsed", placeholder="Copy paste the Job Description....", height=200)
+        description = st.text_area(label="None", label_visibility="collapsed", placeholder="Copy paste the Job Description....", height=150)
         st.write("")
         go_desc = st.button(label="Clean Description", type="primary")
         st.session_state.user["clicked_go"] = False
@@ -156,12 +155,15 @@ with st.container(key="rolefit"):
 
         back = st.button(label="Back to Home", type="primary")
         if back:
-            del st.session_state.user["resume_extracted_text"]
-            del st.session_state.user["resume_cleaned_text"]
-            del st.session_state["got_text"]
-            del st.session_state.user["description_text"]
-            del st.session_state.user["desc_cleaned"]
-            del st.session_state["got_desc"]
+            # Safely remove keys from nested dict
+            st.session_state.user.pop("resume_extracted_text", None)
+            st.session_state.user.pop("resume_cleaned_text", None)
+            st.session_state.user.pop("description_text", None)
+            st.session_state.user.pop("desc_cleaned", None)
+
+            # Safely remove keys from session_state itself
+            st.session_state.pop("got_text", None)
+            st.session_state.pop("got_desc", None)
 
             st.switch_page("frontend/papers/home.py")
 
