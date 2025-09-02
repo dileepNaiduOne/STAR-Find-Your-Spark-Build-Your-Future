@@ -1,5 +1,5 @@
 import streamlit as st
-from backend.code.functions import extract_text_from_resume, clean_text
+from backend.code.functions import extract_text_from_resume, clean_text, extract_with_pymupdf
 import tempfile
 import os
 import streamlit.components.v1 as components
@@ -19,11 +19,16 @@ with st.container(key="rolefit"):
         st.write("")
         upload = st.file_uploader(label="Resume", label_visibility="collapsed", type=["pdf", "doc", "docx"])
         st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
         go = st.button(label="Extract Text", type="primary")
         st.session_state.user["clicked_go"] = False
         st.write("")
-        st.divider()
         st.write("")
+        st.write("")
+        st.write("")
+        st.divider()
 
         if go:
             if upload:
@@ -33,11 +38,12 @@ with st.container(key="rolefit"):
                     tmp_file.write(upload.read())
                     temp_path = tmp_file.name
 
-                text = extract_text_from_resume(temp_path)
+                text = extract_with_pymupdf(temp_path)
+                # text = extract_text_from_resume(temp_path)
                 st.session_state.user["resume_extracted_text"] = text
                 cleaned_text = clean_text(st.session_state.user["resume_extracted_text"])
                 st.session_state.user["resume_cleaned_text"] = cleaned_text
-                st.session_state.user["show"] = True
+                st.session_state["got_text"] = True
 
 
             else:
@@ -87,19 +93,13 @@ with st.container(key="rolefit"):
 
         st.divider()
 
-        if go:
-            if upload:
-                extension = os.path.splitext(upload.name)[1]
-
-                with tempfile.NamedTemporaryFile(delete=False, suffix=extension) as tmp_file:
-                    tmp_file.write(upload.read())
-                    temp_path = tmp_file.name
-
-                text = extract_text_from_resume(temp_path)
-                st.session_state.user["resume_extracted_text"] = text
-                cleaned_text = clean_text(st.session_state.user["resume_extracted_text"])
-                st.session_state.user["resume_cleaned_text"] = cleaned_text
-                st.session_state.user["show"] = True
+        if go_desc:
+            if description:
+                
+                st.session_state.user["description_text"] = description
+                cleaned_desc = clean_text(st.session_state.user["description_text"])
+                st.session_state.user["desc_cleaned"] = cleaned_desc
+                st.session_state["got_desc"] = True
 
 
             else:
@@ -114,13 +114,13 @@ with st.container(key="rolefit"):
                         background-color: #F2F2F2;
                         display:flex; justify-content:center; align-items:center;
                         ">
-                        Please upload the file
+                        Please type/paste role description
                     </div>
                     """
                 )
 
-        if st.session_state.get("got_text") and "resume_cleaned_text" in st.session_state.user:
-                st.markdown(f"""<div style="font-size: 1.5rem;">Cleaned Résumé</div>""", unsafe_allow_html=True)
+        if st.session_state.get("got_desc") and "desc_cleaned" in st.session_state.user:
+                st.markdown(f"""<div style="font-size: 1.5rem;">Cleaned Description</div>""", unsafe_allow_html=True)
                 st.write("")
                 st.html(
                     f"""
@@ -131,13 +131,13 @@ with st.container(key="rolefit"):
                         border-radius: 8px;
                         border: 2px solid rgba(38,38,38,0.6); 
                     ">
-                        {", ".join(st.session_state.user["resume_cleaned_text"])}
+                        {", ".join(st.session_state.user["desc_cleaned"])}
                     </div>
                     """
                 )
                 # st.write(", ".join(st.session_state.user["resume_cleaned_text"]))
-                with st.expander(label="RAW Extracted Résumé"):
-                    st.write(st.session_state.user["resume_extracted_text"])
+                with st.expander(label="RAW Description"):
+                    st.write(st.session_state.user["description_text"])
 
 
 
@@ -156,6 +156,13 @@ with st.container(key="rolefit"):
 
         back = st.button(label="Back to Home", type="primary")
         if back:
+            del st.session_state.user["resume_extracted_text"]
+            del st.session_state.user["resume_cleaned_text"]
+            del st.session_state["got_text"]
+            del st.session_state.user["description_text"]
+            del st.session_state.user["desc_cleaned"]
+            del st.session_state["got_desc"]
+
             st.switch_page("frontend/papers/home.py")
 
 

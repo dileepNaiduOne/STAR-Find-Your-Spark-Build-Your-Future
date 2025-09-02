@@ -13,6 +13,7 @@ from backend.database.database_tasks import add_new_user_to_profile_data
 from email_validator import validate_email, EmailNotValidError
 import streamlit as st
 import spacy
+import fitz
 # import subprocess
 # import sys
 # subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
@@ -71,7 +72,9 @@ def check_email(email):
 
 
 def extract_text_from_resume(file_path):
+    st.write(file_path)
     ext = os.path.splitext(file_path)[1].lower()
+    st.write(ext)
 
     if ext == ".pdf":
         with pdfplumber.open(file_path) as pdf:
@@ -85,6 +88,15 @@ def extract_text_from_resume(file_path):
 
     else:
         return None
+    
+
+def extract_with_pymupdf(pdf_path):
+    doc = fitz.open(pdf_path)
+    text = ""
+    for page in doc:
+        text += page.get_text()
+    return text
+    
     
 
 def clean_text(text):
