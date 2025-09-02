@@ -16,8 +16,8 @@ import spacy
 # import subprocess
 # import sys
 # subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
-from spacy.cli import download
-download("en_core_web_sm")
+# from spacy.cli import download
+# download("en_core_web_sm")
 nlp = spacy.load("en_core_web_sm")
 
 
