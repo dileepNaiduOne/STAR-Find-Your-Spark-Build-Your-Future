@@ -20,7 +20,7 @@ with c1:
             st.text("Super-App That\nAccelerates Reputation")
         with st.container(key="customHeadTags"):
             st.markdown(
-                """Résumé Feedback &nbsp;&nbsp;•&nbsp;&nbsp; Career Guide &nbsp;&nbsp;•&nbsp;&nbsp; Role Judge &nbsp;&nbsp;•&nbsp;&nbsp; Step-by-Step Skill Path 
+                """Résumé Feedback &nbsp;&nbsp;•&nbsp;&nbsp; Career Guide &nbsp;&nbsp;•&nbsp;&nbsp; Predict Role Fit &nbsp;&nbsp;•&nbsp;&nbsp; Step-by-Step Skill Path 
                 <br><br><br><br>
                 <i>An app that believes in you and truly cares for your journey</i>""",
                 unsafe_allow_html=True
