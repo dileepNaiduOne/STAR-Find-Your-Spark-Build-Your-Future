@@ -263,3 +263,14 @@ button[data-testid="stBaseButton-pills"]:last-child {
     border-radius: 8px;                   /* optional: rounded corners */
     padding: 3%;                        /* spacing inside */
 }
+
+[data-testid="stMetricDelta"] {
+    background-color: transparent;
+    color: #262626  ;
+}
+
+.st-key-ceffee .e52wr8w2{
+    display:flex; 
+    justify-content:center; 
+    align-items:center;
+}

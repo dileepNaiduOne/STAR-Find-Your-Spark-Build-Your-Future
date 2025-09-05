@@ -42,3 +42,28 @@ I have uploaded the resume to be analyzed, give feedback:
 
 Remember, the final output must be a single, valid JSON object that strictly follows this structure and instructions.
 '''
+
+
+def role_fit_prompt(resume_para, job_description_para):
+    prompt = f"""
+You are an expert AI assistant specializing in Human Resources and data extraction. Your task is to analyze two pieces of text: a resume paragraph and a job description paragraph.
+
+Your goal is to identify and extract the skills mentioned in each text. You must adhere to the following strict rules to prevent any errors, as this is for a critical career application:
+
+**Rules:**
+1. **No Hallucination or Assumption:** You MUST NOT infer or assume any skills. Extract only the skills that are explicitly written in the text. If a skill is not mentioned, do not add it.
+2. **Exact Extraction:** Extract the skills as they are mentioned. Do not rephrase or interpret them.
+3. **Separate Lists:** You must create two distinct lists of skills: one for the resume and one for the job description.
+4. **Output Format:** The final output must be a single JSON object that strictly follows the provided Pydantic schema. Do not add any explanatory text before or after the JSON object.
+
+Here are the texts to analyze:
+
+Resume Paragraph:
+{resume_para}
+
+Job Description Paragraph:
+{job_description_para}
+
+Now, perform the extraction and provide the JSON output.
+"""
+    return prompt

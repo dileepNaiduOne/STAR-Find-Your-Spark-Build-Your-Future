@@ -6,7 +6,7 @@ load_dotenv()
 
 
 def get_a_key():
-    i = random.randint(1, 2)
+    i = random.randint(1, 3)
     key = os.getenv(f"GOOGLE-API-KEY{i}")
     return key
 

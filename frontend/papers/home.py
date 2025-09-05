@@ -9,7 +9,7 @@ st.markdown(
     f"""
     <div style="display:flex; justify-content:center; align-items:center;">
         <img src="https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR%20Logo.png" 
-             alt="User Image" style="max-width:max(20vw, 20vh);">
+             alt="User Image" style="max-width:max(17vw, 17vh);">
     </div>
     """,
     unsafe_allow_html=True
@@ -22,8 +22,6 @@ except AttributeError:
     st.switch_page("frontend/papers/reload_error.py")
 
 
-st.write("")
-st.write("")
 
 
 with st.container(key="buttonsPills"):
@@ -42,6 +40,15 @@ with st.container(key="buttonsPills"):
             del st.session_state[key]
         st.switch_page("frontend/papers/login.py")
 
+with st.container(key="coffee"):
+    st.write("")
+    st.write("")
+    st.divider()
+    st.write("")
+    st.markdown(f"""<div style="display:flex; justify-content:center; align-items:center; font-size: max(1vw, 1vh);"> If this Star App made a difference in your career, a coffee is the perfect thank you </div>""", unsafe_allow_html=True)
+    # st.caption("If this Star made a difference, a coffee is the perfect thank you")
+    st.write("")
+    st.html('''<div style="display:flex; justify-content:center; align-items:center;" > <a href="https://www.buymeacoffee.com/dileepnaidu" target="_blank"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=dileepnaidu&button_colour=FAED7D&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a> </div>''')
 
 # with st.container(key="pills1"):
 #     task = st.pills(label="select", options=["Résumé Feedback", "Role Fit", "Log Out"], label_visibility="collapsed")

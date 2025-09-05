@@ -43,7 +43,7 @@ if go:
     if upload:
         st.toast("Scroll down and wait for a moment.", icon=":material/arrow_circle_down:", duration="long")
         st.title("Feedback", anchor=False)
-        with st.spinner(text="Please, wait. LLM is working on your file...", show_time=True):
+        with st.spinner(text="Please, wait. LLM is working on your file... (≈40 Seconds)", show_time=True):
             extension = os.path.splitext(upload.name)[1]
 
             with tempfile.NamedTemporaryFile(delete=False, suffix=extension) as tmp_file:

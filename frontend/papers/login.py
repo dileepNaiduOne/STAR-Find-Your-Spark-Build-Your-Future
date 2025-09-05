@@ -22,7 +22,7 @@ with c1:
             st.markdown(
                 """Résumé Feedback &nbsp;&nbsp;•&nbsp;&nbsp; Career Guide &nbsp;&nbsp;•&nbsp;&nbsp; Predict Role Fit &nbsp;&nbsp;•&nbsp;&nbsp; Step-by-Step Skill Path 
                 <br><br><br><br>
-                <i>An app that believes in you and truly cares for your journey</i>""",
+                <i>An AI app that believes in you and truly cares for your journey</i>""",
                 unsafe_allow_html=True
             )
         with st.container(key="customLogin"):

@@ -1,13 +1,13 @@
 import streamlit as st
 from backend.database.database_tasks import check_if_email_in_user_data, add_new_user_to_user_data, check_if_user_in_user_data
-from backend.code.functions import check_email
+from backend.code.functions import check_email, jaccard_similarity, cosine_similarity, get_skills_list_from_llm
 
 @st.dialog("Sign Up")
 def sign_up():
     if "user" not in st.session_state:
         with st.form("signup_form"):
             name = st.text_input("Name :", placeholder="Enter your name")
-            email = st.text_input("Email Address :", placeholder="Enter your email address")
+            email = st.text_input("Email Address :", placeholder="Enter your working email address, STAR will mail you the feedback")
             age = st.text_input("Age :", placeholder="Enter your age")
             gender = st.selectbox(label="Gender", options=["Female", "Male", "Others"], index=None)
             st.divider()
@@ -86,3 +86,25 @@ def log_in():
 
                 # else:
                 #     st.error("Your Secret Sentence is not matching with the database. :red[PLEASE CHECK]")
+
+
+@st.dialog("Role Fit")
+def role_fit(resume_text, desc_text):
+    d0, d1, d2, d3, d4 = st.columns([0.10, 0.30, 0.20, 0.30, 0.10])
+
+    with st.spinner(text="Please wait, Extracting skills from Resume & Job Description (≈80 Seconds)", show_time=True):
+        resume_list, desc_list = get_skills_list_from_llm(resume_text, desc_text)
+        resume_text_set = set(k.lower() for k in resume_list)
+        desc_text_set = set(k.lower() for k in desc_list)
+
+        with d1:
+            st.metric(label="Keyword Match", value=f"{jaccard_similarity(resume_text_set, desc_text_set)*100:.2f}%")
+            st.caption(body="Checks if exact words appear in both resume and job description")
+
+        with d3:
+            st.metric(label="Semantic Match", value=f"{cosine_similarity(sorted(resume_text_set), sorted(desc_text_set))*100:.2f}%")
+            st.caption(body="Finds meaning-based similarities, even if the words are different")
+
+    st.title("Skills the job wants, but not found in your resume", anchor=False)
+    # st.pills(label="Skills the job wants, but not found in your resume", options=list(desc_text_set - resume_text_set))
+    st.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".join(desc_text_set - resume_text_set), unsafe_allow_html=True)
