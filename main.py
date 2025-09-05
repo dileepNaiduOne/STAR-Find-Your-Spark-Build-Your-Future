@@ -19,17 +19,17 @@ home_page = st.Page(
 
 reload_page = st.Page(
     page="frontend/papers/reload_error.py", 
-    title=f"Mistake!"
+    title=f"STAR - Mistake!"
 )
 
 resume_check_page = st.Page(
     page="frontend/papers/resume_check.py", 
-    title=f"Improve!"
+    title=f"STAR - Improve!"
 )
 
 role_fit_page = st.Page(
     page="frontend/papers/role_fit.py", 
-    title=f"FIt!"
+    title=f"STAR - Fit!"
 )
 pg = st.navigation(pages=[login_page, home_page, reload_page, resume_check_page, role_fit_page], position="hidden")
 
