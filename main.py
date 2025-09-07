@@ -31,6 +31,12 @@ role_fit_page = st.Page(
     page="frontend/papers/role_fit.py", 
     title=f"STAR - Fit!"
 )
-pg = st.navigation(pages=[login_page, home_page, reload_page, resume_check_page, role_fit_page], position="hidden")
+
+learn_skill_page = st.Page(
+    page="frontend/papers/learn_skill.py", 
+    title=f"STAR - Upgrade!"
+)
+
+pg = st.navigation(pages=[login_page, home_page, reload_page, resume_check_page, role_fit_page, learn_skill_page], position="hidden")
 
 pg.run()

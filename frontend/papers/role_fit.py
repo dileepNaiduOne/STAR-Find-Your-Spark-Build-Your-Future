@@ -12,7 +12,7 @@ with open( "style.css" ) as css:
     st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
 
 st.write("")
-st.markdown(f"""<div style="display:flex; justify-content:center; align-items:center; font-size: max(3vw, 3vh);"> AI-Powered Role Fit Matcher </div>""", unsafe_allow_html=True)
+st.markdown(f"""<div style="display:flex; align-items:center; justify-content:center; font-size: max(3vw, 3vh); gap:max(2vw, 2vh);"><img src="https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR.png" alt="logo" style="height:max(3vw, 3vh); width:auto;"><span>| &nbsp; AI-Powered Role Fit Matcher </span></div>""", unsafe_allow_html=True)
 st.write("")
 st.write("")
 
@@ -94,14 +94,8 @@ with st.container(key="rolefit"):
             if (a != None) and (b != None):
                 resume_cleaned_text = ", ".join(st.session_state.user["resume_cleaned_text"])
                 desc_cleaned = ", ".join(st.session_state.user["desc_cleaned"])
-
                 
                 role_fit(resume_cleaned_text, desc_cleaned)
-                
-
-
-
-
 
             elif a == None:
                 st.html(f"""<div style="color: #A62B1F; font-weight: bold; border: 2px solid #F2F2F2; padding: 10px; border-radius: 5rem; background-color: #F2F2F2;display:flex; justify-content:center; align-items:center;">Please click on "Extract Text"</div>""")

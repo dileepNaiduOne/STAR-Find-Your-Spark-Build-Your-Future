@@ -7,8 +7,8 @@ from google import genai
 from pydantic import BaseModel, Field
 import pathlib
 from backend.code.shuffle_llm_key import get_a_key
-from config import LLM_model, LLM_model_for_skills_extraction
-from backend.code.prompts import resume_feedback_prompt, role_fit_prompt
+from config import LLM_model, LLM_model_for_skills_extraction, LLM_model_for_skill_suggestion
+from backend.code.prompts import resume_feedback_prompt, role_fit_prompt, suggest_a_skill_prompt, suggest_a_skill_plan_prompt
 from backend.database.database_tasks import add_new_user_to_profile_data
 from email_validator import validate_email, EmailNotValidError
 from sentence_transformers import SentenceTransformer, util
@@ -63,6 +63,36 @@ def get_feedback_from_llm(uploaded_file):
     
 
     return feed
+
+def get_skill_suggest_from_LLM(profile_info, profile_skills):
+
+    full_prompt = suggest_a_skill_prompt(profile_info, profile_skills)
+    full_prompt = full_prompt.replace("\t", "").replace("\r", "").strip()
+
+    client = genai.Client(api_key=get_a_key())
+
+    # Send request
+    response = client.models.generate_content(
+        model=LLM_model_for_skill_suggestion,
+        contents=[full_prompt]
+    )
+
+    return response.text
+
+def get_skill_plan_suggest_from_LLM(skill, profile_info, profile_skills):
+
+    full_prompt = suggest_a_skill_plan_prompt(skill, profile_info, profile_skills)
+    full_prompt = full_prompt.replace("\t", "").replace("\r", "").strip()
+
+    client = genai.Client(api_key=get_a_key())
+
+    # Send request
+    response = client.models.generate_content(
+        model=LLM_model_for_skill_suggestion,
+        contents=[full_prompt]
+    )
+
+    return response.text
 
 
 def get_skills_list_from_llm(resume_cleaned_text, desc_cleaned):

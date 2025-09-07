@@ -67,3 +67,73 @@ Job Description Paragraph:
 Now, perform the extraction and provide the JSON output.
 """
     return prompt
+
+
+def suggest_a_skill_prompt(profile_info, profile_skills):
+    prompt = f"""
+You are an expert career strategist and technical skills advisor with deep knowledge of current and future industry trends. Your goal is to identify the single most impactful technical skill that I can learn to significantly accelerate my career growth and earning potential.
+Analyze my professional profile below and recommend one technical skill that I should learn.
+
+My Professional Persona:
+{profile_info}
+
+My Current Skillset:
+{profile_skills}
+
+Your Task:
+Based on my profile, provide the following:
+The Single Best Skill to Learn: Recommend one, and only one, technical skill. This skill must meet the following criteria:
+It is not already listed in my skillset.
+It has a massive scope for future growth and is in high demand in the current job market.
+Learning it will provide the maximum possible positive impact on my career trajectory.
+Justification: Briefly explain in 2-4 sentences why this specific skill is the perfect next step for my career, considering my current background and future industry trends.
+Detailed Learning Plan: Provide a comprehensive, day-by-day plan to learn this skill over a 15-day period. The plan must be detailed, practical, and structured for a beginner in this specific skill. Use clear markdown formatting (headings for each week, and bullet points for each day's topics and tasks).
+
+Example Structure for the Learning Plan:
+
+Week 1: Foundations
+Day 1: Introduction to [Skill Name]
+Topic 1: What is [Skill Name] and why is it important?
+Topic 2: Core concepts and terminology.
+Task: Set up the development environment.
+
+Day 2: Basic Principles
+Topic 1: ...
+Task: ...
+... and so on for all 15 days.
+"""
+    return prompt
+
+
+def suggest_a_skill_plan_prompt(skill, profile_info, profile_skills):
+    prompt = f"""
+You are an expert technical trainer and curriculum designer. Your specialty is creating accelerated, practical learning plans that help professionals integrate new skills with their existing knowledge base.
+My goal is to learn a specific technical skill. I need you to analyze my professional profile and create a personalized, comprehensive, and actionable 30-day learning plan for the skill I have chosen.
+
+My Professional Persona:
+{profile_info}
+
+My Current Skillset:
+{profile_skills}
+
+The Skill I Want to Learn:
+{skill}
+
+Your Task:
+Justification: Briefly explain in 2-4 sentences why this specific skill is the perfect next step for my career, considering my current background and future industry trends.
+Detailed Learning Plan: Provide a comprehensive, day-by-day plan to learn this skill over a 15-day period. The plan must be detailed, practical, and structured for a beginner in this specific skill. Use clear markdown formatting (headings for each week, and bullet points for each day's topics and tasks).
+
+Example Structure for the Learning Plan:
+
+Week 1: Foundations
+Day 1: Introduction to [Skill Name]
+Topic 1: What is [Skill Name] and why is it important?
+Topic 2: Core concepts and terminology.
+Task: Set up the development environment.
+
+Day 2: Basic Principles
+Topic 1: ...
+Task: ...
+... and so on for all 15 days.
+"""
+    return prompt

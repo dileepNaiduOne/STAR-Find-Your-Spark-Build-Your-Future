@@ -34,6 +34,10 @@ with st.container(key="buttonsPills"):
     if rolefit_button:
         st.switch_page("frontend/papers/role_fit.py")
 
+    learn_skill_button = st.button(label="Learn a skills", type="primary")
+    if learn_skill_button:
+        st.switch_page("frontend/papers/learn_skill.py")
+
     logout_button = st.button(label="Log Out", type="primary")
     if logout_button:
         for key in st.session_state.keys():

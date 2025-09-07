@@ -36,7 +36,7 @@ def check_if_email_in_user_data(email: str):
         result = session.execute(query, {"email": email}).scalar()
         return result
     finally:
-        session.close()  # return connection to pool
+        session.close()
 
 
 def add_new_user_to_user_data(name, email, age, gender, pin, secret_sentence):
@@ -97,6 +97,18 @@ def check_if_user_in_user_data(email: str, pin: str):
     try:
         query = text("SELECT * FROM user_data WHERE email = :email AND pin = :pin")
         result = session.execute(query, {"email": email, "pin": pin})
+        data = result.fetchall()
+        return data[0] if data else None
+    finally:
+        session.close()
+
+
+def check_if_user_in_profile_data(user_id):
+    """Check if a user exists with given email and pin."""
+    session = SessionLocal()
+    try:
+        query = text("SELECT * FROM profile_data WHERE user_id = :user_id")
+        result = session.execute(query, {"user_id": user_id})
         data = result.fetchall()
         return data[0] if data else None
     finally:

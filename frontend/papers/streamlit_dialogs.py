@@ -1,6 +1,9 @@
 import streamlit as st
 from backend.database.database_tasks import check_if_email_in_user_data, add_new_user_to_user_data, check_if_user_in_user_data
 from backend.code.functions import check_email, jaccard_similarity, cosine_similarity, get_skills_list_from_llm
+from backend.code.functions import get_feedback_from_llm
+import tempfile
+import os
 
 @st.dialog("Sign Up")
 def sign_up():
@@ -108,3 +111,42 @@ def role_fit(resume_text, desc_text):
     st.title("Skills the job wants, but not found in your resume", anchor=False)
     # st.pills(label="Skills the job wants, but not found in your resume", options=list(desc_text_set - resume_text_set))
     st.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".join(desc_text_set - resume_text_set), unsafe_allow_html=True)
+
+
+
+@st.dialog("Add Your Data")
+def add_data():
+
+    st.markdown(f"""<div style="font-size: 1.5rem;">Upload Your Résumé</div>""", unsafe_allow_html=True)
+    upload = st.file_uploader(label="Resume", label_visibility="collapsed", type=["pdf", "doc", "docx"])
+    go = st.button(label="Get Feedback", type="primary")
+    st.divider()
+    if go:
+        if upload:
+            st.title("Feedback", anchor=False)
+            with st.spinner(text="Please, wait. LLM is working on your file... (≈40 Seconds)", show_time=True):
+                extension = os.path.splitext(upload.name)[1]
+
+                with tempfile.NamedTemporaryFile(delete=False, suffix=extension) as tmp_file:
+                    tmp_file.write(upload.read())
+                    temp_path = tmp_file.name
+
+                feedback = get_feedback_from_llm(temp_path)
+                st.session_state.user["feedback"] = feedback
+                st.switch_page("frontend/papers/learn_skill.py")
+        else:
+            st.html(
+                f"""
+                <div style="
+                    color: #A62B1F; 
+                    font-weight: bold; 
+                    border: 2px solid #F2F2F2; 
+                    padding: 10px; 
+                    border-radius: 5rem; 
+                    background-color: #F2F2F2;
+                    display:flex; justify-content:center; align-items:center;
+                    ">
+                    Please upload the file
+                </div>
+                """
+            )
