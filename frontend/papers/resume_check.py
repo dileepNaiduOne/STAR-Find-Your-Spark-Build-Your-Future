@@ -13,17 +13,12 @@ with open( "style.css" ) as css:
 
 user_id = st.session_state.user["user_id"]
 
+st.write("")
+st.markdown(f"""<div style="display:flex; align-items:center; justify-content:center; font-size: max(3vw, 3vh); gap:max(2vw, 2vh);"><img src="https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR.png" alt="logo" style="height:max(3vw, 3vh); width:auto;"><span>| &nbsp; StarRésumé with AI</span></div>""", unsafe_allow_html=True)
+st.write("")
+
 c0, c1 = st.columns([0.5, 0.5])
 with c0:
-    st.html(
-    f"""
-    <div>
-        <img src="https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR.png" 
-             alt="logo" style="max-width:20%;">
-    </div>
-    """
-)
-    st.write("")
     st.markdown(f"""<div style="font-size: 1.5rem;">Upload Your Résumé</div>""", unsafe_allow_html=True)
 
     upload = st.file_uploader(label="Resume", label_visibility="collapsed", type=["pdf", "doc", "docx"])
