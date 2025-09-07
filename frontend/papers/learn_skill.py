@@ -29,6 +29,7 @@ try:
             if row == None:
                 user_id = st.session_state.user["user_id"]
                 add_data()
+                st.rerun()
 
             else:
                 status.update(label="Got your data!", state="complete")
