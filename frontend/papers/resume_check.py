@@ -11,7 +11,10 @@ st.set_page_config(menu_items={"About":"Dileep Naidu"})
 with open( "style.css" ) as css:
     st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
 
-user_id = st.session_state.user["user_id"]
+try:
+    user_id = st.session_state.user["user_id"]
+except AttributeError:
+    st.switch_page("frontend/papers/reload_error.py")
 
 st.write("")
 st.markdown(f"""<div style="display:flex; align-items:center; justify-content:center; font-size: max(3vw, 3vh); gap:max(2vw, 2vh);"><img src="https://raw.githubusercontent.com/dileepNaiduOne/STAR-Find-Your-Spark-Build-Your-Future/refs/heads/main/frontend/assets/STAR.png" alt="logo" style="height:max(3vw, 3vh); width:auto;"><span>| &nbsp; StarRésumé with AI</span></div>""", unsafe_allow_html=True)
@@ -68,35 +71,20 @@ if go:
             """
         )
 
-with st.container(key="buttonsPills"):
-    mail = st.button(label="Email me this feedback", type="primary", icon=":material/outgoing_mail:")
-    if mail:
-        if "feedback" in st.session_state.user.keys():
-            send_an_email(text=st.session_state.user["feedback"], send_to=st.session_state.user["email"])
-            st.toast(body=f"👍 Email sent to {st.session_state.user["email"]}", duration="long")
-            del st.session_state.user["feedback"]
-        else:
-            st.toast("😔 Sorry, no feedback. First generate a feedback.", duration="short")
+try:
+    with st.container(key="buttonsPills"):
+        mail = st.button(label="Email me this feedback", type="primary", icon=":material/outgoing_mail:")
+        if mail:
+            if "feedback" in st.session_state.user.keys():
+                send_an_email(text=st.session_state.user["feedback"], send_to=st.session_state.user["email"])
+                st.toast(body=f"👍 Email sent to {st.session_state.user["email"]}", duration="long")
+                del st.session_state.user["feedback"]
+            else:
+                st.toast("😔 Sorry, no feedback. First generate a feedback.", duration="short")
 
-    back = st.button(label="Back to Home", type="primary")
-    if back:
-        st.switch_page("frontend/papers/home.py")
+        back = st.button(label="Back to Home", type="primary")
+        if back:
+            st.switch_page("frontend/papers/home.py")
 
-
-
-
-# with st.container(key="feedback_buttons"):
-#     with st.container():
-#         mail = st.button(label="Email me this feedback", type="primary", icon=":material/outgoing_mail:")
-#     if mail:
-#         if "feedback" in st.session_state.user.keys():
-#             send_an_email(text=st.session_state.user["feedback"], send_to=st.session_state.user["email"])
-#             st.toast(body=f"👍 Email sent to {st.session_state.user["email"]}", duration="long")
-#             del st.session_state.user["feedback"]
-#         else:
-#             st.toast("😔 Sorry, no feedback. First generate a feedback.", duration="short")
-
-#     with st.container(key="myButtons"):
-#         back = st.button(label="Back to Home", type="primary")
-#     if back:
-#         st.switch_page("frontend/papers/home.py")
+except AttributeError:
+    st.switch_page("frontend/papers/reload_error.py")
