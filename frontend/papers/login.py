@@ -17,7 +17,7 @@ with c1:
         st.write("")
         st.write("")
         with st.container(key="customHeadLine"):
-            st.text("Super-App That\nAccelerates Reputation")
+            st.text("Super-App That\nAccelerates Your Career")
         with st.container(key="customHeadTags"):
             st.markdown(
                 """AI Résumé Feedback &nbsp;&nbsp;•&nbsp;&nbsp; Career Guide &nbsp;&nbsp;•&nbsp;&nbsp; Predict Role Fit &nbsp;&nbsp;•&nbsp;&nbsp; Roadmap to Learn Next Skill  
