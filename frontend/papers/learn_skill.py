@@ -86,6 +86,8 @@ try:
 
         back = st.button(label="Back to Home", type="primary")
         if back:
+            del st.session_state.user["proflie_info"]
+            del st.session_state.user["profile_skills"]
             st.switch_page("frontend/papers/home.py")
 
 except AttributeError:
