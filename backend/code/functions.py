@@ -36,7 +36,7 @@ class RoleFitSkillsList(BaseModel):
 
 def get_feedback_from_llm(uploaded_file):
 
-    client = genai.Client(api_key=get_a_key())
+    client = genai.Client(api_key=os.getenv("GOOGLE-API-KEY"))
 
     # Retrieve and encode the PDF byte
     file_path = pathlib.Path(uploaded_file)
@@ -69,7 +69,7 @@ def get_skill_suggest_from_LLM(profile_info, profile_skills):
     full_prompt = suggest_a_skill_prompt(profile_info, profile_skills)
     full_prompt = full_prompt.replace("\t", "").replace("\r", "").strip()
 
-    client = genai.Client(api_key=get_a_key())
+    client = genai.Client(api_key=os.getenv("GOOGLE-API-KEY"))
 
     # Send request
     response = client.models.generate_content(
@@ -84,7 +84,7 @@ def get_skill_plan_suggest_from_LLM(skill, profile_info, profile_skills):
     full_prompt = suggest_a_skill_plan_prompt(skill, profile_info, profile_skills)
     full_prompt = full_prompt.replace("\t", "").replace("\r", "").strip()
 
-    client = genai.Client(api_key=get_a_key())
+    client = genai.Client(api_key=os.getenv("GOOGLE-API-KEY"))
 
     # Send request
     response = client.models.generate_content(
@@ -103,7 +103,7 @@ def get_skills_list_from_llm(resume_cleaned_text, desc_cleaned):
     # print(full_prompt)  # Debug only
 
     # Initialize client
-    client = genai.Client(api_key=get_a_key())
+    client = genai.Client(api_key=os.getenv("GOOGLE-API-KEY"))
 
     # Send request
     response = client.models.generate_content(
